@@ -11,18 +11,18 @@ parseFizzBuzz :: String -> [ String ]
 parseFizzBuzz = filter ( ` elem ` [ "Fizz" , "Buzz" , "FizzBuzz" ] ) . words
 
 solve :: [ FizzBuzz ] -> [ Int ]
-solve xs = safe_head $ filter isOK $ solveHelper xs
+solve xs = safeHead $ filter isOK $ solveHelper xs
 
 solveHelper :: [ FizzBuzz ] -> [ [ ( FizzBuzz , ( Int , FizzBuzz ) ) ] ]
 solveHelper [ ] = [ ]
-solveHelper xs @ ( Fizz : _ ) = map ( zip xs ) [ genFizzBuzz 3 , genFizzBuzz 6 , genFizzBuzz 9 , genFizzBuzz 12 ]
-solveHelper xs @ ( Buzz : _ ) = map ( zip xs ) [ genFizzBuzz 5 , genFizzBuzz 10 ]
+solveHelper xs @ ( Fizz : _ ) = map ( zip xs ) [ genFizzBuzz x | x <- [ 3 , 6 , 9 , 12 ] ]
+solveHelper xs @ ( Buzz : _ ) = map ( zip xs ) [ genFizzBuzz x | x <- [ 5 , 10 ] ]
 solveHelper xs @ ( FizzBuzz : _ ) = [ zip xs $ genFizzBuzz 15 ]
 solveHelper _ = [ ]
 
-safe_head :: [ [ ( FizzBuzz , ( Int , FizzBuzz ) ) ] ] -> [ Int ]
-safe_head [ ] = [ ]
-safe_head xs = head $ sortBy lengthOrd $ map ( \ xs' -> [ head xs' .. last xs' ] ) $ map ( map ( \ ( _ , ( x , _ ) ) -> x ) ) xs
+safeHead :: [ [ ( FizzBuzz , ( Int , FizzBuzz ) ) ] ] -> [ Int ]
+safeHead [ ] = [ ]
+safeHead xs = head $ sortBy lengthOrd $ map ( \ xs' -> [ head xs' .. last xs' ] ) $ map ( map ( \ ( _ , ( x , _ ) ) -> x ) ) xs
 
 lengthOrd :: ( Ord a ) => [ a ] -> [ a ] -> Ordering
 lengthOrd xs ys
