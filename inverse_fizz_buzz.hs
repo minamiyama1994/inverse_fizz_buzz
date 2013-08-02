@@ -24,7 +24,7 @@ safeHead :: [ [ ( FizzBuzz , ( Int , FizzBuzz ) ) ] ] -> [ Int ]
 safeHead [ ] = [ ]
 safeHead xs = head $ sortBy lengthOrd $ map ( \ xs' -> [ head xs' .. last xs' ] ) $ map ( map ( \ ( _ , ( x , _ ) ) -> x ) ) xs
 
-lengthOrd :: ( Ord a ) => [ a ] -> [ a ] -> Ordering
+lengthOrd :: [ Int ] -> [ Int ] -> Ordering
 lengthOrd xs ys
 	| length xs /= length ys = compare ( length xs ) ( length ys )
 	| otherwise = compare xs ys
