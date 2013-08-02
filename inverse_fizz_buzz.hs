@@ -2,7 +2,7 @@
 
 import Data.List
 
-data FizzBuzz = Fizz | Buzz | FizzBuzz | None deriving ( Read , Eq )
+data FizzBuzz = Fizz | Buzz | FizzBuzz deriving ( Read , Eq )
 
 main :: IO ( )
 main = getContents >>= ( return . map read . parseFizzBuzz ) >>= ( return . solve ) >>= mapM_ print
@@ -18,7 +18,6 @@ solveHelper [ ] = [ ]
 solveHelper xs @ ( Fizz : _ ) = map ( zip xs ) [ genFizzBuzz x | x <- [ 3 , 6 , 9 , 12 ] ]
 solveHelper xs @ ( Buzz : _ ) = map ( zip xs ) [ genFizzBuzz x | x <- [ 5 , 10 ] ]
 solveHelper xs @ ( FizzBuzz : _ ) = [ zip xs $ genFizzBuzz 15 ]
-solveHelper _ = [ ]
 
 safeHead :: [ [ ( FizzBuzz , ( Int , FizzBuzz ) ) ] ] -> [ Int ]
 safeHead [ ] = [ ]
