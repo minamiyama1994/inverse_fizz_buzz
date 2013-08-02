@@ -15,8 +15,8 @@ solve xs = safeHead $ filter isOK $ solveHelper xs
 
 solveHelper :: [ FizzBuzz ] -> [ [ ( FizzBuzz , ( Int , FizzBuzz ) ) ] ]
 solveHelper [ ] = [ ]
-solveHelper xs @ ( Fizz : _ ) = map ( zip xs ) [ genFizzBuzz x | x <- [ 3 , 6 , 9 , 12 ] ]
-solveHelper xs @ ( Buzz : _ ) = map ( zip xs ) [ genFizzBuzz x | x <- [ 5 , 10 ] ]
+solveHelper xs @ ( Fizz : _ ) = [ zip xs $ genFizzBuzz x | x <- [ 3 , 6 , 9 , 12 ] ]
+solveHelper xs @ ( Buzz : _ ) = [ zip xs $  genFizzBuzz x | x <- [ 5 , 10 ] ]
 solveHelper xs @ ( FizzBuzz : _ ) = [ zip xs $ genFizzBuzz 15 ]
 
 safeHead :: [ [ ( FizzBuzz , ( Int , FizzBuzz ) ) ] ] -> [ Int ]
