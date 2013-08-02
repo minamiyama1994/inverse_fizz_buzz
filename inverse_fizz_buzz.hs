@@ -11,7 +11,7 @@ parseFizzBuzz :: String -> [ String ]
 parseFizzBuzz = filter ( ` elem ` [ "Fizz" , "Buzz" , "FizzBuzz" ] ) . words
 
 solve :: [ FizzBuzz ] -> [ Int ]
-solve xs = safeHead $ filter isOK $ solveHelper xs
+solve xs = safeHead $ filter ( all ( \ ( x1 , ( _ , x2 ) ) -> x1 == x2 ) ) $ solveHelper xs
 
 solveHelper :: [ FizzBuzz ] -> [ [ ( FizzBuzz , ( Int , FizzBuzz ) ) ] ]
 solveHelper [ ] = [ ]
@@ -34,6 +34,3 @@ genFizzBuzz x
 	| x ` mod ` 3 == 0 = ( x , Fizz ) : genFizzBuzz ( x + 1 )
 	| x ` mod ` 5 == 0 = ( x , Buzz ) : genFizzBuzz ( x + 1 )
 	| otherwise = genFizzBuzz ( x + 1 )
-
-isOK :: [ ( FizzBuzz , ( Int , FizzBuzz ) ) ] -> Bool
-isOK = all ( \ ( x1 , ( _ , x2 ) ) -> x1 == x2 )
