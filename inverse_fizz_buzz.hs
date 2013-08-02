@@ -5,7 +5,7 @@ import Data.List
 data FizzBuzz = Fizz | Buzz | FizzBuzz deriving ( Read , Eq )
 
 main :: IO ( )
-main = getContents >>= ( return . map read . parseFizzBuzz ) >>= ( return . solve ) >>= mapM_ print
+main = getContents >>= ( mapM_ print . solve . map read . parseFizzBuzz )
 
 parseFizzBuzz :: String -> [ String ]
 parseFizzBuzz = filter ( ` elem ` [ "Fizz" , "Buzz" , "FizzBuzz" ] ) . words
